@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+  --workspace-bg: #f8fafc;
+  --workspace-surface: #ffffff;
+  --glass-surface: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(226, 232, 240, 0.85);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --shadow-3d-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-3d-elevated: 0 20px 40px -8px rgba(15, 23, 42, 0.08), 0 8px 16px -4px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-3d-floating: 0 25px 50px -12px rgba(79, 70, 229, 0.15), 0 10px 20px -6px rgba(15, 23, 42, 0.06);
+}
+
+.dark,
+html.dark {
+  --workspace-bg: #090d16;
+  --workspace-surface: #0f172a;
+  --glass-surface: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(51, 65, 85, 0.65);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --shadow-3d-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.35), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+  --shadow-3d-elevated: 0 20px 40px -8px rgba(0, 0, 0, 0.55), 0 8px 16px -4px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-3d-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 10px 20px -6px rgba(79, 70, 229, 0.2);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--workspace-bg);
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}
+
+.dark body,
+html.dark body {
+  background-color: var(--workspace-bg);
+  color: #f1f5f9;
+}
+
+/* Custom sleek 3D scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Studio Typography */
+.font-display {
+  font-family: 'Outfit', var(--font-sans), sans-serif;
+}
+
+/* 3D Perspective Scene Container */
+.perspective-workspace {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Glassmorphism 3D Panels */
+.glass-panel-3d {
+  background: var(--glass-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-3d-elevated);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: var(--shadow-3d-subtle);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-panel-subtle {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  box-shadow: var(--shadow-3d-subtle);
+}
+
+/* Interactive 3D Card Hover */
+.card-3d {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+  position: relative;
+}
+
+.card-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -6px rgba(15, 23, 42, 0.1), 0 8px 16px -4px rgba(79, 70, 229, 0.08);
+}
+
+.dark .card-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(79, 70, 229, 0.25);
+}
+
+/* Tactile 3D Action Buttons */
+.btn-3d-primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-3d-primary:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 12px 26px -4px rgba(79, 70, 229, 0.55), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-3d-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.4);
+}
+
+.btn-3d-secondary {
+  background: var(--glass-surface);
+  backdrop-filter: blur(12px);
+  color: inherit;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .btn-3d-secondary {
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn-3d-secondary:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.15);
+}
+
+.btn-3d-secondary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Ambient 3D Lighting Mesh */
+.ambient-mesh-canvas {
+  position: relative;
+  background-color: var(--workspace-bg);
+}
+
+.ambient-mesh-canvas::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  left: 5%;
+  width: 550px;
+  height: 550px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.09) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-mesh-canvas::after {
+  content: '';
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  width: 650px;
+  height: 650px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.06) 0%, rgba(147, 51, 234, 0.05) 40%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .ambient-mesh-canvas::before {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(100px);
+}
+
+.dark .ambient-mesh-canvas::after {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(59, 130, 246, 0.08) 50%, transparent 75%);
+  filter: blur(110px);
+}
+
+/* Subtle Floating Animation */
+@keyframes subtle-3d-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtle-3d-float 4.5s ease-in-out infinite;
+}
+
+/* Page Entrance Transition */
+@keyframes fade-slide-up-3d {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-page-enter {
+  animation: fade-slide-up-3d 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Micro-Pulse Glow for alerts */
+@keyframes soft-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(244, 63, 94, 0);
+  }
+}
+
+.animate-glow-pulse {
+  animation: soft-pulse-glow 2.2s infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Print / PDF Generation Styles */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  header, aside, .print\\:hidden {
+    display: none !important;
+  }
+
+  .fixed.inset-0 {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .modal-3d {
+    box-shadow: none !important;
+    border: none !important;
+    max-height: none !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+  }
+
+  #printable-manual {
+    overflow: visible !important;
+    max-height: none !important;
+    padding: 0 !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+}
+
+

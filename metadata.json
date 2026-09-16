@@ -1,0 +1,6 @@
+{
+  "name": "Creative Task Flow",
+  "description": "Aplikasi monitoring pekerjaan desain grafis terpadu dengan alur pipeline brief, penugasan desainer, siklus revisi terukur, approval deliverable, dan jadwal deadline.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
